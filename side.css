@@ -1,0 +1,47 @@
+.excel-component {
+    padding: 20px;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+.controls button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.controls input {
+    padding: 10px;
+    width: 150px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.excel-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.excel-table th, .excel-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.excel-table th {
+    background-color: #f2f2f2;
+}
+
+.excel-table td input {
+    width: 100%;
+    padding: 5px;
+    border: none;
+    box-sizing: border-box;
+}

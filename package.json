@@ -2,7 +2,7 @@
   "name": "anand-s-extension",
   "displayName": "Anand s extension",
   "version": "0.0.1",
-  "description": "automation",
+  "description": "made by varun for https://anandgxcr.setmore.com/",
   "author": "varun",
   "scripts": {
     "dev": "plasmo dev",
@@ -10,6 +10,7 @@
     "package": "plasmo package"
   },
   "dependencies": {
+    "@plasmohq/storage": "^1.11.0",
     "plasmo": "0.88.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
@@ -25,7 +26,13 @@
   },
   "manifest": {
     "host_permissions": [
-      "https://*/*"
+      "https://anandgxcr.setmore.com/*",
+      "https://anandgxcr.setmore.com/beta/*",
+      "https://indiamd.setmore.com/beta/*"
+    ],
+    "permissions": [
+      "scripting",
+      "activeTab"
     ]
   }
 }
