@@ -3,6 +3,7 @@ export const config = {
     world: "MAIN"
 
   }
+
 window.close();
   
 

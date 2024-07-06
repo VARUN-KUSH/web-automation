@@ -1,4 +1,3 @@
-// import type { PlasmoCSConfig } from "plasmo"
 import { Storage } from "@plasmohq/storage"
 
 const storage = new Storage()
@@ -9,6 +8,7 @@ export const config = {
   ]
 }
 
+console.log("in formfill")
 async function getvalue() {
   console.log("inside form page")
   const data = await storage.get("usersdata") // "value"
@@ -17,7 +17,10 @@ async function getvalue() {
 }
 
 async function fillsandsubmitsvalue() {
+  
   const data = await getvalue()
+  let val = data? data[1]: null
+  console.log(val)
   //got the data from excelsheet
   //fill the page with 0th index
   // if filled and clicked
@@ -25,7 +28,9 @@ async function fillsandsubmitsvalue() {
   //delete the 0th index data
   //close the page
   //
-
+  if(!val) {
+    window.close()
+  }
   setTimeout(() => {
     let form = document.querySelector(
       'main > div:nth-child(2) > div > div:nth-child(1) > div > form[id="userDetails"]'
@@ -49,6 +54,7 @@ async function fillsandsubmitsvalue() {
         (span) => span.innerText === "15 Minutes Meeting"
       )
       if (targetSpan) {
+        val = data[0]
         console.log("Found the span:", targetSpan)
       } else {
         console.log("No span with the specified innerText found.")
@@ -75,11 +81,8 @@ async function fillsandsubmitsvalue() {
 
     let inputfield = form.querySelectorAll("div > fieldset > div > div")
     console.log(inputfield)
-    if (window.location.href.includes() || window.location.href.includes()) {
-    }
-    const val = data[0]
+    
     inputfield.forEach((field, index) => {
-      // val.map(e => console.log(e))
       console.log(index)
       console.log(field)
       if (index == 0) {
@@ -132,10 +135,25 @@ async function fillsandsubmitsvalue() {
     console.log(submit)
     if (submit) {
       try {
-        // submit.click()
-        // console.log(window.location.href)
-        // window.close()
-        // closewindow()
+        submit.click()
+        // console.log(window.location.href) 
+        for (const key in data) {
+            console.log(data[key])
+            if (val == data[key]) {
+              delete data[key];
+              console.log(`Deleted key: ${key} with value: ${val}`);
+            }
+        }
+        async function setstorage() {
+          await storage.set("usersdata", data)
+        }
+        
+        setstorage()
+        console.log(data)
+        console.log(typeof(data))
+
+        window.close()
+       
       } catch (error) {
         console.log("here inside error")
         console.error(error)

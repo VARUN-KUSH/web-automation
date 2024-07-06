@@ -1,6 +1,8 @@
 console.log("hello sir")
-
+import { Storage } from "@plasmohq/storage"
 import type { PlasmoCSConfig } from "plasmo"
+
+const storage = new Storage()
 
 export const config:PlasmoCSConfig = {
   matches: ["https://anandgxcr.setmore.com/beta/anand?step=time-slot&products*",
@@ -11,6 +13,12 @@ export const config:PlasmoCSConfig = {
 }
 
 console.log(window.location.href)
+async function getvalue() {
+  console.log("inside form page")
+  const data = await storage.get("usersdata") // "value"
+  console.log(data)
+  return data
+}
 
 // function clickVisaLinks(): void {
 //   // Get all <a> tags in the body
@@ -82,7 +90,9 @@ console.log(window.location.href)
 //   win.document.body.appendChild(script);
   
 // }
-function calendarselecting() {
+async function calendarselecting() {
+   const data = await getvalue()
+   console.log(data)
    const script = document.createElement('script');
    console.log("inside")
   //  const listItems = main.querySelector('div:nth-child(2) > div > div:nth-child(1) > div > div > div > div:nth-child(2) > ul[aria-labelledby="heading-slot-date"] > li');
@@ -123,7 +133,9 @@ function calendarselecting() {
 
 window.addEventListener('load', () => {
   calendarselecting();
-  setInterval(window.location.reload, 40000)
+  setInterval(() => {
+    window.location.href = window.location.href;
+  }, 40000)
   });
 
 
