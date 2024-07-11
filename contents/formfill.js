@@ -188,7 +188,8 @@ const storage = new Storage();
 export const config = {
   matches: [
     "https://anandgxcr.setmore.com/beta/anand?step=user-details&products*"
-  ]
+  ],
+  all_frames: true
 };
 
 console.log("in formfill");
@@ -204,13 +205,21 @@ async function getvalue() {
   return data;
 }
 
+async function clearData() {
+  const val = await storage.remove("usersdata")
+  console.log(val)
+  localStorage.removeItem('usedArrays');
+}
 
 async function getUniqueArray() {
   const data = await getvalue();
+  // localStorage.setItem('arraysExhausted', 'false');
   if (!data || !Array.isArray(data) || data.length === 0) {
+
     console.error('Invalid or empty data retrieved.');
     return null;
   }
+
 
   let pageIdentifier = sessionStorage.getItem('pageIdentifier');
   if (!pageIdentifier) {
@@ -219,16 +228,20 @@ async function getUniqueArray() {
   }
 
   let usedArrays = JSON.parse(localStorage.getItem('usedArrays')) || [];
+  let usedArrays_value = JSON.parse(localStorage.getItem('usedArraysValue')) || [];
 
   if (usedArrays.length >= data.length) {
     console.error('No more unique arrays available.');
     localStorage.setItem('arraysExhausted', 'true');
     localStorage.removeItem('pageIdentifier');
     sessionStorage.removeItem('pageIdentifier');
-    localStorage.removeItem('usedArrays');
+    await clearData()
+   
     localStorage.removeItem('uniqueArray');
+    window.close()
     alert('all values are filled now start again')
-    return null;
+   
+    // return null;
   }
 
   let uniqueArray = null;
@@ -238,6 +251,8 @@ async function getUniqueArray() {
     if (!usedArrays.includes(i)) {
       uniqueArray = data[i];
       usedArrays.push(i);
+      usedArrays_value.push[data[i]]
+      localStorage.setItem('usedArraysValue', JSON.stringify(usedArrays_value))
       localStorage.setItem('usedArrays', JSON.stringify(usedArrays));
       localStorage.setItem(pageIdentifier, JSON.stringify(uniqueArray));
       console.log('Used array index:', i);
@@ -346,6 +361,9 @@ async function fillsandsubmitsvalue() {
     if (submit) {
       try {
         submit.click();
+        setTimeout(() => {
+          window.close()
+        }, 5000)
         // Programmatically click the submit button
         // alert("form filled successfully")
         // window.close();

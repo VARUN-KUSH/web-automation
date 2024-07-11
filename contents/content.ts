@@ -53,14 +53,14 @@ async function calendarselecting() {
   document.body.appendChild(script);
 }
 
-// function checkAndFetchNewData() {
-//   console.log("fetch data")
-//   // if (localStorage.getItem('arraysExhausted') === 'true') {
-//   //   console.log('Arrays exhausted, fetching new data.');
-//   //   // Fetch new data from local storage or any other logic
-//   //   localStorage.removeItem('arraysExhausted');
-//   // }
-// }
+function checkAndFetchNewData() {
+  console.log("fetch data")
+  // if (localStorage.getItem('arraysExhausted') === 'true') {
+  //   console.log('Arrays exhausted, fetching new data.');
+  //   // Fetch new data from local storage or any other logic
+  //   localStorage.removeItem('arraysExhausted');
+  // }
+}
 
 window.addEventListener('load', () => {
   calendarselecting();
@@ -74,7 +74,7 @@ window.addEventListener('load', () => {
   //   else {
   //     window.location.href = window.location.href
   //   }
-  // }, 40000);
+  // }, 30000);
   setInterval(() => {
     window.location.href = window.location.href
   }, 20000)
